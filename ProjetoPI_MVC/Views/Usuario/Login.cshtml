@@ -1,0 +1,22 @@
+﻿@model ProjetoPI_MVC.Models.Usuarios
+@using (Html.BeginForm("Login", "Usuario", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    if (!(TempData["ErroLogin"] is null))
+    {
+        <label class="label-danger">@TempData["ErroLogin"]</label>
+    }
+    <div class="form-group">
+        @Html.LabelFor(u => u.Email, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(u => u.Email, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(u => u.Senha, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(u => u.Senha, new { @class = "form-control" })
+        </div>
+    </div>
+    <input type="submit" value="entrar" class="btn btn-block" />
+
+}

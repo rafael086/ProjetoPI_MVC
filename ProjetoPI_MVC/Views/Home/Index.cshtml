@@ -1,0 +1,40 @@
+﻿@model ProjetoPI_MVC.ViewModels.ProjetosOngsViewModel
+
+@section estilo{
+<link href="@Url.Content("~/Content/Index.css")" rel="stylesheet" />
+}
+@section jumbotron{
+    <div class="jumbotron">
+        <div class="page-header">
+            <h1 class="text-center">Apoie uma ong ou um projeto</h1>
+        </div>
+    </div>
+}
+<section id="ongs" class="row">
+    <h2 class="page-header text-center">Ongs</h2>
+    @foreach (var ong in Model.Ongs)
+    {
+        <div class="col-md-4">
+            <figure class="thumbnail">
+                <img src="~/Imagens/@ong.Imagens.Nome " alt="" />
+                <figcaption class="caption">
+                    @Html.ActionLink(ong.Nome, "Ong", "Usuario", new { id = ong.Id },null)
+                </figcaption>
+            </figure>
+        </div>
+    }
+</section>
+<section id="projetos" class="row">
+    <h2 class="page-header text-center">Projetos</h2>
+    @foreach (var projeto in Model.Projetos)
+    {
+    <div class="col-md-4">
+        <figure class="thumbnail">
+            <img src="~/Imagens/@projeto.Imagens.Nome" alt="Alternate Text" />
+            <figcaption class="caption">
+                @Html.ActionLink(projeto.Nome, "Index","Projetos", new {id = projeto.Id},null)
+            </figcaption>
+        </figure>     
+    </div>
+    }
+</section>

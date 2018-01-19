@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Meu Aplicativo ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("estilo", false)
+</head>
+<body>
+    <div class="container-fluid">
+        <header class="row">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        @Html.ActionLink("Nome do site","Index","Home", null, new { @class = "navbar-brand"})
+                    </div>
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Ongs", "Ongs", "Categoria")</li>
+                        <li>@Html.ActionLink("Projetos", "Projetos", "Categoria")</li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink("Criar projeto","Criar","Projetos")</li>
+                        }
+                    </ul>
+                    @using (Html.BeginForm("Index","Busca",FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+                    {
+                        <div class="input-group">
+                            @Html.TextBox("Busca",null,new { @class = "form-control", placeholder = "Buscar Ongs/Projetos"})
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    }
+                    @Html.Partial("_MenuLogadoDeslogado")
+                </div>
+            </nav>
+        </header>
+        <div role="main" class="container-fluid">
+            @RenderSection("jumbotron",false)
+            @RenderBody()
+        </div>
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Meu Aplicativo ASP.NET</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

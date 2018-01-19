@@ -1,0 +1,17 @@
+﻿@{
+    @model ProjetoPI_MVC.Models.Usuarios
+    ViewBag.Title = "Ong";
+}
+<div id="destaque-usuario" class="jumbotron row">
+    <div class="col-md-3">
+        <img src="~/Imagens/@Model.Imagens.Nome" alt="" class="img-thumbnail" />
+    </div>
+    <div class="col-md-9">
+        <h1>@Model.Nome</h1>
+        <p>@Model.Frase</p>
+    </div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a href="#" runat="server" data-toggle="modal" data-target="#modalAlteracoes">Editar</a>
+    }
+</div>

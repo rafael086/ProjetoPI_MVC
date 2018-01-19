@@ -1,0 +1,68 @@
+﻿@{
+    @model List<ProjetoPI_MVC.Models.Projetos>
+    ViewBag.Title = "Projetos";
+    @section estilo{
+        <link href="@Url.Content("~/Content/Categoria.css")" rel="stylesheet" />
+    }
+}
+
+<h2 class="page-header text-center">Projetos</h2>
+<div id="destaque" class="row">
+    <div class="col-md-6">
+        <img src="~/Imagens/@Model.First().Imagens.Nome" class="img-rounded" />
+    </div>
+    <div class="col-md-6 panel panel-default">
+        <div class="panel-heading">
+            <h3>@Model.First().Nome</h3>
+        </div>
+        <div class="panel-body">
+            <p>@Model.First().Descricao</p>
+        </div>
+        <div class="panel-footer">
+            @if (Model.First().Tipo == "Doação")
+            {
+                <div class="col-md-9 progress">
+                    <div class="progress-bar progress-bar-success" role="progressbar"></div>
+                </div>
+                <span class="col-md-3">@Model.First().Apoios.Count apoios</span>
+            }
+            else
+            {
+                <span class="col-md-6">Apoiado por @Model.First().Apoios.Count pessoas</span>
+                <span class="col-md-6">Meta: @Model.First().Meta</span>
+            }
+            @{ Model.RemoveAt(0);}
+        </div>
+    </div>
+</div>
+<div id="grupo" class="row">
+    @foreach (var projeto in Model)
+    {
+        <div class="col-md-6">
+            <div class="col-md-4">
+                <img src="~/Imagens/@projeto" alt="Alternate Text" class="img-rounded" />
+            </div>
+            <div class="col-md-8 panel panel-default">
+                <div class="panel-heading">
+                    <h3>@projeto.Nome</h3>
+                </div>
+                <div class="panel-body"><p>@projeto.Descricao</p></div>
+                <div class="panel-footer">
+                    @if (projeto.Tipo == "Doação")
+                    {
+                        <div class="progress col-md-9">
+                            <div class="progress-bar progress-bar-sucess"></div>
+                            <span class="col-md-3">@projeto.Apoios.Count apoios</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <span class="col-md-6">Apoiado por @projeto.Apoios.Count pessoas</span>
+                        <span class="col-md-6">Meta: @projeto.Meta</span>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

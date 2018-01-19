@@ -1,0 +1,28 @@
+﻿/************************Estilos Gerais*********************************/
+/*limita o tilulo do painel a seu conteiner*/
+.panel-heading h3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/*limita o texto do corpo do painel a seu conteiner*/
+.panel-body {
+    overflow: hidden;
+}
+
+/*alinha os labels dos forms a esquerda*/
+.control-label {
+    text-align: left !important;
+}
+
+/*tira padding e margin da barra de progresso*/
+.progress {
+    padding: 0;
+    margin: 0;
+}
+
+/*configura estilo do rodape do painel*/
+.panel-footer {
+    overflow: overlay;
+    padding: 10px 0;
+}

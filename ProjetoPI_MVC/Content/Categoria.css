@@ -1,0 +1,22 @@
+﻿#destaque img {
+    height: 400px;
+    width: 100%;
+}
+
+#destaque .panel-body {
+    height: 283px;
+}
+
+#grupo .panel-body {
+    height: 132px;
+}
+
+#grupo img {
+    width: 100%;
+    height: 250px;
+}
+
+#grupo .col-md-6 {
+    padding-right: 0;
+    padding-left: 0;
+}

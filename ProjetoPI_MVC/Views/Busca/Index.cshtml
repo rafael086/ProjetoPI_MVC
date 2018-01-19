@@ -1,0 +1,58 @@
+﻿@{
+    @model ProjetoPI_MVC.ViewModels.ProjetosOngsViewModel
+    ViewBag.Title = "Index";
+    @section estilo{
+        <link href="@Url.Content("~/Content/Busca.css")" rel="stylesheet" />
+    }
+}
+
+<h1 class="page-header text-center">Resultados para: "@ViewBag.Busca"</h1>
+@if (Model.Ongs.Count > 0)
+{
+    <section class="container-fluid">
+        <h2 class="text-center">Ongs</h2>
+        @foreach (var ong in Model.Ongs)
+        {
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="~/Imagens/@ong.Imagens.Nome" alt="" class="img-rounded" />
+                </div>
+                <div class="col-md-8 panel panel-default">
+                    <div class="panel-heading">
+                        <h3>@Html.ActionLink(ong.Nome, "Index", "Usuario", new { id = ong.Id })</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>@ong.Frase</p>
+                    </div>
+                    <div class="panel-footer">
+                        <span class="col-md-12">Projetos Criados: @ong.Projetos.Count</span>
+                    </div>
+                </div>
+            </div>
+        }
+    </section>
+}
+@if (Model.Projetos.Count > 0)
+{
+    <section class="container-fluid">
+        <h2 class="text-center">Projetos</h2>
+        @foreach (var projeto in Model.Projetos)
+        {
+            <div class="panel-footer">
+                @if (projeto.Tipo == "Doação")
+                {
+                    <div class="progress col-md-9">
+                        <div class="progress-bar progress-bar-sucess"></div>
+                        <span class="col-md-3">@projeto.Apoios.Count apoios</span>
+                    </div>
+                }
+                else
+                {
+                    <span class="col-md-6">Apoiado por @projeto.Apoios.Count pessoas</span>
+                    <span class="col-md-6">Meta: @projeto.Meta</span>
+                }
+            </div>
+        }
+    </section>
+}
+
