@@ -10,7 +10,7 @@
         <h1>@Model.Nome</h1>
         <p>@Model.Frase</p>
     </div>
-    @if (User.Identity.IsAuthenticated)
+    @if (!ViewBag.Visitante)
     {
         <a href="#" runat="server" data-toggle="modal" data-target="#modalAlteracoes">Editar</a>
     }

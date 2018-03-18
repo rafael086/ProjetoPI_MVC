@@ -14,10 +14,23 @@ namespace ProjetoPI_MVC
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Voluntariar",
+                url: "Ong/Voluntariar/{id}",
+                defaults: new { controller = "Ong", action = "Voluntariar", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Ong",
+                url: "Ong/{id}",
+                defaults: new { controller = "Ong", action = "Index" }
+            );
+                      
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
         }
     }
 }

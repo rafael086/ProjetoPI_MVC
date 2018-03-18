@@ -117,7 +117,7 @@ namespace ProjetoPI_MVC.Models
             modelBuilder.Entity<Imagens>()
                 .HasMany(e => e.Sobre)
                 .WithOptional(e => e.Imagens)
-                .HasForeignKey(e => e.idImagem);
+                .HasForeignKey(e => e.IdImagem);
 
             modelBuilder.Entity<Imagens>()
                 .HasMany(e => e.Usuarios)
@@ -229,7 +229,7 @@ namespace ProjetoPI_MVC.Models
             modelBuilder.Entity<Usuarios>()
                 .HasMany(e => e.Sobre)
                 .WithRequired(e => e.Usuarios)
-                .HasForeignKey(e => e.idUsuario)
+                .HasForeignKey(e => e.IdUsuario)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Voluntarios>()

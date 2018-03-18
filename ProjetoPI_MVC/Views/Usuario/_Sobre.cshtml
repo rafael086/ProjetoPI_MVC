@@ -1,0 +1,19 @@
+﻿@model List<ProjetoPI_MVC.Models.Sobre>
+@foreach (var sobre in Model.Where(s => s.IdImagem == null))
+{
+    <div class="row" data-sobre="@sobre.Id">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>@sobre.Titulo</h3>
+            </div>
+            <div class="panel-body">
+                <p>@sobre.Texto</p>
+                @if (!ViewBag.Visitante)
+                {
+                    <button type="button" class="btn btn-default btnEditar">Editar</button>
+                }
+            </div>
+        </div>
+    </div>
+
+}

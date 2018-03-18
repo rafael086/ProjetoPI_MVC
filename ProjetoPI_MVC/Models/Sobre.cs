@@ -18,9 +18,9 @@ namespace ProjetoPI_MVC.Models
         [Required]
         public string Texto { get; set; }
 
-        public int idUsuario { get; set; }
+        public int IdUsuario { get; set; }
 
-        public int? idImagem { get; set; }
+        public int? IdImagem { get; set; }
 
         public virtual Imagens Imagens { get; set; }
 

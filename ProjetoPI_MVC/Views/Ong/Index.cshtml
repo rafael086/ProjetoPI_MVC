@@ -1,0 +1,138 @@
+﻿@model ProjetoPI_MVC.Models.Ongs
+@section jumbotron{
+    @{Html.RenderPartial("../Usuario/_DestaqueUsuario");}
+}
+@if (ViewBag.Doador)
+{
+    <section>
+        <h2 class="text-center page-header">Quer ser um voluntario?</h2>
+        <table class="table">
+            <caption class="caption text-center"><h3>Endereco</h3></caption>
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Cep</th>
+                    <th>Numero</th>
+                    <th>Rua</th>
+                    <th>Bairro</th>
+                    <th>Cidade</th>
+                    <th>Estado</th>
+                    <th>Representante</th>
+                    <th>Cargo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.Email</td>
+                    <td>@Model.Telefone</td>
+                    <td>@Model.Enderecos.CEP</td>
+                    <td>@Model.Enderecos.Rua</td>
+                    <td>@Model.Enderecos.Bairro</td>
+                    <td>@Model.Enderecos.Cidade</td>
+                    <td>@Model.Enderecos.Estado</td>
+                    <td>@Model.Representante</td>
+                    <td>@Model.Cargo</td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="button" id="btnVoluntariar" class="@ViewBag.EstiloBotao">@ViewBag.TextoBotao</button>
+    </section>
+}
+<section id="sobre">
+    <h2 class="text-header page-header">Sobre</h2>
+    @{Html.RenderPartial("../Usuario/_Sobre", Model.Sobre.ToList());}
+    @if (!ViewBag.Visitante)
+    {
+        <button type="button" class="btn btn-default pull-right" id="btnAddSobre">
+            <span class="glyphicon glyphicon-plus"></span>Adicionar conteudo
+        </button>
+    }
+</section>
+<section id="pessoal">
+    <h2 class="text-header page-header">Pessoal</h2>
+    @{Html.RenderPartial("_Pessoal", Model.Sobre.ToList()); }
+    @if (!ViewBag.Visitante)
+    {
+        <button type="button" class="btn btn-default pull-right" id="btnAddPessoal">
+            <span class="glyphicon glyphicon-plus"></span>Adicionar conteudo
+        </button>
+    }
+</section>
+@section scripts{
+    @Scripts.Render("~/Scripts/Site/Usuario.js")
+<script>
+        $(function () {
+            @if (!ViewBag.Visitante)
+            {
+                <text>
+            configuraSobre();
+            $("#btnAddPessoal").click(function () {
+                $(this).attr("disabled", "disabled");
+                $.ajax({
+                    datatype: "html",
+                    type: "POST",
+                    url: "@Url.Action("NovoPessoal","Usuario")",
+                    success: function (html) {
+                        $("#btnAddPessoal").before(html);
+                        $("#btnCancelarAddPessoal").click(function () {
+                            $("#novoPessoal").remove();
+                            $("#btnAddPessoal").removeAttr("disabled");
+                        });
+                    }
+                });
+            });
+                </text>
+            }
+
+            @if (ViewBag.Doador)
+            {
+                <text>
+                    voluntariar();
+                </text>
+            }
+        });
+
+        @if (ViewBag.Doador)
+        {
+            <text>
+                function voluntariar() {
+                    $("#btnVoluntariar").click(function () {
+                        $.ajax({
+                            datatype: "json",
+                            type: "POST",
+                            url: "@Url.Action("NovoPessoal")",
+                            success: function (valor) {
+                                configuraBotao(valor);
+                            }
+                        });
+                    });
+                }
+
+                function configuraBotao(valor) {
+                    var botao = $("#btnVoluntariar");
+                    if (valor == 0) {
+                        botao.removeClass();
+                        botao.addClass("btn btn-block btn-success");
+                        botao.text("Voluntariar-se a esta ong");
+                    }
+                    else if (valor = 1) {
+                        botao.removeClass();
+                        botao.addClass("btn btn-block btn-warning");
+                        botao.text("A ong esta analisando seus dados, clique para remover a solicitação");
+                    }
+                    else if (valor = 2) {
+                        botao.removeClass();
+                        botao.addClass("btn btn-block btn-danger");
+                        botao.text("A ong não aceitou sua solicitacao");
+                    }
+                    else {
+                        botao.removeClass();
+                        botao.addClass("btn btn-block btn-success");
+                        botao.text("A ong aceitou sua solicitacao");
+                    }
+                }
+            </text>
+        }
+</script>
+}

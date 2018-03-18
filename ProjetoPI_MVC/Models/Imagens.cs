@@ -22,6 +22,14 @@ namespace ProjetoPI_MVC.Models
         [StringLength(45)]
         public string Nome { get; set; }
 
+        /// <summary>
+        /// Salva a imagem na pasta de upload e no banco
+        /// </summary>
+        public Imagens SalvaImagem(string nomeImagem)
+        {
+
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Projetos> Projetos { get; set; }
 
